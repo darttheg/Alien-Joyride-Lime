@@ -223,6 +223,11 @@ function selectSubmenu(menu)
         btn:setCallback(function(v) tempConfig.gfx.fps = v end)
         addToSettingsObjects(btn)
 
+        btn = enumeratorButton.new("VSync", {"Off", "On"}) --[[@as EnumeratorButton]]
+        btn:setVal(tempConfig.gfx.vsync)
+        btn:setCallback(function(v) tempConfig.gfx.vsync = v end)
+        addToSettingsObjects(btn)
+
         btn = enumeratorButton.new("Chatbox", {"Off", "On"}, "Shows messages from other spacecrafts.") --[[@as EnumeratorButton]]
         btn:setVal(tempConfig.gfx.chatbox)
         btn:setCallback(function(v) tempConfig.gfx.chatbox = v end)

@@ -1,44 +1,6 @@
-[11:24:26] Lime started with 18 modules loaded
-[11:24:28] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:28] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:30] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:30] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:30] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:30] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:31] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:33] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:33] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:33] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:33] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:33] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:33] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:33] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:33] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:40] Applied!
-[11:24:43] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:43] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:50] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:50] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:50] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:24:50] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:25:02] Applied!
-[11:25:04] Applied!
-[11:25:14] Applied!
-[11:25:27] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:25:27] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:25:27] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
-[11:25:27] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
-[11:25:39] Lime ended with 38 warnings, 0 errors
+[11:46:11] Lime started with 18 modules loaded
+[11:46:14] WARNING: Object referencing asset .../graphics/meter_outline.png was garbage collected. Was it defined in a method as a local variable?
+[11:46:14] WARNING: Object referencing asset .../graphics/meter_green.png was garbage collected. Was it defined in a method as a local variable?
+[11:46:16] Applied!
+[11:46:19] Applied!
+[11:46:21] Lime ended with 2 warnings, 0 errors

@@ -17,6 +17,7 @@ UIState = {
 ---@field driver integer
 ---@field fov number
 ---@field fps integer
+---@field vsync integer
 ---@field perspective integer
 ---@field chatbox integer
 ---@field info integer

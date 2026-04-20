@@ -21,6 +21,7 @@ local function createConfig()
     gfx.driver = 0 -- DX9
     gfx.fov = 100
     gfx.fps = 60
+    gfx.vsync = 0
     gfx.chatbox = 1
     gfx.info = 0
     gfx.perspective = 0 -- First person
@@ -129,6 +130,7 @@ function game:init()
     Lime.onStart:hook(function()
         Lime.setFrameRate(self.config.gfx.fps)
         Lime.Audio.setMainVolume(self.config.audio.master)
+        Lime.setVSync(self.config.gfx.vsync == 1)
     end)
     self.onConfigChanged:hook(function(cfg)
         ---@type Config
@@ -136,6 +138,7 @@ function game:init()
         
         Lime.setFrameRate(cfg.gfx.fps)
         Lime.Audio.setMainVolume(cfg.audio.master)
+        Lime.setVSync(cfg.gfx.vsync == 1)
     end)
 end
 
