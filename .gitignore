@@ -2,4 +2,6 @@
 .lib
 .pdb
 .emmyrc.json
-.log
+output.log
+bin
+*.exe
