@@ -3,5 +3,6 @@
 .pdb
 .emmyrc.json
 output.log
-bin
+/bin
 *.exe
+*.cfg
