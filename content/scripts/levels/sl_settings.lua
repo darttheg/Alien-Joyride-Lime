@@ -2,6 +2,7 @@
 ---@field setListening fun(self: SettingsMenu, listening: boolean, index: integer)
 ---@field canListen boolean
 ---@field getListening fun(self: SettingsMenu)
+---@field setBackButtonCallback fun(self: SettingsMenu, callback: function?)
 
 local Sublevel = require("content.scripts.interfaces.sublevel")
 local sl = Sublevel.new() --[[@as SettingsMenu]]
@@ -419,15 +420,6 @@ function sl:init()
         end)
     end
 
-    backButton.onPressed:hook(function()
-        if GameManager.state == GameState.Menu then
-            local mainMenu = GameManager.level --[[@as Menu?]]
-            if mainMenu then
-                mainMenu:toSubMenu(MenuSubScreen.Main)
-            end
-        end
-    end)
-
     applyButton.onPressed:hook(function()
         GameManager:applyConfig(tempConfig)
     end)
@@ -435,8 +427,15 @@ function sl:init()
     updateLayout()
 end
 
+---@param callback function?
+function sl:setBackButtonCallback(callback)
+    backButton.onPressed:clear()
+    if not callback then return end
+    backButton.onPressed:hook(callback)
+end
+
 function sl:clean()
-    headerContainer:destroy()
+    -- Should never be removed so...
 end
 
 return sl

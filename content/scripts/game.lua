@@ -150,10 +150,10 @@ function game:init()
         Lime.Window.setTitle("Alien Joyride")
         Lime.Audio.setMuteWhileUnfocused(true)
         createFonts()
-        GameManager:visit(require(req.Levels.Menu), "menu")
         GameManager:add(require(req.Sublevels.SettingsMenu), "settings")
         local settings = GameManager:getSublevel("settings")
         if settings then settings:setActive(false) end
+        GameManager:visit(require(req.Levels.Menu), "menu")
     end)
 
     Lime.onClose:hook(function()

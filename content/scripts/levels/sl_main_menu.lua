@@ -59,6 +59,17 @@ local function setButtonFunctionality()
     quit.onPressed:hook(function()
         Lime.close()
     end)
+
+    -- Set back function for settings to go to the main menu
+    local mainMenu = GameManager.level --[[@as Menu?]]
+    if mainMenu then
+        local settings = GameManager:getSublevel("settings") --[[@as SettingsMenu?]]
+        if settings then
+            settings:setBackButtonCallback(function()
+                mainMenu:toSubMenu(MenuSubScreen.Main)
+            end)
+        end
+    end
 end
 
 -- Hooks

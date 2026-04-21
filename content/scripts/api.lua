@@ -55,7 +55,6 @@ UIState = {
 ---@field orbs integer
 ---@field events integer
 ---@field bots integer
----...
 
 ---@class MultiplayerConfig
 ---@field username string
