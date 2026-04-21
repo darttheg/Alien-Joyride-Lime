@@ -48,4 +48,13 @@ UIState = {
 ---@field audio ConfigAudio
 ---@field input ConfigInput
 
+---@class MPParams
+---@field bots integer
+---...
+
+---@class MultiplayerConfig
+---@field username string
+---@field defaultAddress string
+---@field params MPParams
+
 return true

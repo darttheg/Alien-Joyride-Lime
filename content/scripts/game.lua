@@ -7,12 +7,26 @@
 ---@field state GameState -- Game state
 ---@field uiState UIState -- UI state
 ---@field config Config -- Game configuration table
+---@field mpConfig MultiplayerConfig -- Multiplayer config table
 
 local Manager = require("content.scripts.interfaces.manager")
 local game = Manager.new() --[[@as Game]]
 setmetatable(game, { __index = Manager })
 
+local shuttleNaming = require("content.scripts.tools.shuttleNaming")
+
 ---
+
+local function createMPConfig()
+    local out = {} --[[@as MultiplayerConfig]]
+    local p = {} --[[@as MPParams]]
+
+    out.defaultAddress = "127.0.0.1:25565"
+    out.username = shuttleNaming.generate()
+
+    out.params = p
+    return out
+end
 
 local function createConfig()
     local out = {} --[[@as Config]]
@@ -95,6 +109,18 @@ function game:init()
         end)
     end
 
+    -- Check mp config
+    if not Lime.File.isFile("./config/multiplayer.cfg") then
+        self.mpConfig = createMPConfig()
+    else
+        local out = json:decode(Lime.File.readFile("./config/multiplayer.cfg")) --[[@as MultiplayerConfig]]
+        if not out then
+            Lime.log("Problem decoding multiplayer configuration file...")
+            Lime.displayMessage("Alien Joyride", "There was trouble reading multiplayer.cfg. Get your alien hands off the config file!", Lime.Enum.PopUpIcon.Warning)
+            self.mpConfig = createMPConfig()
+        else self.mpConfig = out end
+    end
+
     -- Check settings, and if they don't exist, then create!
     if not Lime.File.isFile("./config/config.cfg") then
         self.config = createConfig()
@@ -125,6 +151,7 @@ function game:init()
 
     Lime.onClose:hook(function()
         Lime.File.writeFile("./config/config.cfg", json:encode(GameManager.config))
+        Lime.File.writeFile("./config/multiplayer.cfg", json:encode(GameManager.mpConfig))
     end)
 
     Lime.onStart:hook(function()

@@ -10,8 +10,8 @@ setmetatable(sl, { __index = Sublevel })
 local enumeratorButton = require("content.scripts.objects.enumeratorButton")
 local sliderButton = require("content.scripts.objects.sliderButton")
 local inputButton = require("content.scripts.objects.inputButton")
+local basicbutton = require("content.scripts.objects.basicButton")
 
----@enum SubMenus
 local SubMenus = {
     Graphics = 0,
     Audio = 1,
@@ -195,12 +195,12 @@ function sl:getListening()
 end
 
 ---@param menu integer
-function selectSubmenu(menu)
+local function selectSubmenu(menu)
     if subMenu == menu then return end
     subMenu = menu
     clearSettingsObjects()
 
-    local spacing = 10
+    local spacing = 20
     local btn = nil
     if menu == SubMenus.Graphics then
         btn = enumeratorButton.new("Video Driver", {"Direct3D9", "OpenGL"}, "<#E7E550>Must return to your world to take effect.") --[[@as EnumeratorButton]]
@@ -233,7 +233,7 @@ function selectSubmenu(menu)
         btn:setCallback(function(v) tempConfig.gfx.chatbox = v end)
         addToSettingsObjects(btn)
 
-        btn = enumeratorButton.new("Secret Shuttle Info", {"Off", "On"}, "Shows secret shuttle information.") --[[@as EnumeratorButton]]
+        btn = enumeratorButton.new("Shuttle Info", {"Off", "On"}, "Shows ping, frame rate, and more.") --[[@as EnumeratorButton]]
         btn:setVal(tempConfig.gfx.info)
         btn:setCallback(function(v) tempConfig.gfx.info = v end)
         addToSettingsObjects(btn)
@@ -419,7 +419,7 @@ function sl:init()
         if GameManager.state == GameState.Menu then
             local mainMenu = GameManager.level --[[@as Menu?]]
             if mainMenu then
-                mainMenu:showSettings(false)
+                mainMenu:toSubMenu(MenuSubScreen.Main)
             end
         end
     end)

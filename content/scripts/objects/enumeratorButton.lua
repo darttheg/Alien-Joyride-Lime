@@ -1,5 +1,4 @@
 ---@class EnumeratorButton
----@field init fun(self: EnumeratorButton, title: string, options: string[], callback: function?, subtitle: string?)
 ---@field selected integer
 ---@field options table<integer, string>
 ---@field title string
@@ -111,6 +110,7 @@ function btn:clean()
     self.titleText:destroy()
     self.subtitleText:destroy()
     self.optionText:destroy()
+    self.container:destroy()
 
     self.hoverHook:unhook()
     self.pressHook:unhook()

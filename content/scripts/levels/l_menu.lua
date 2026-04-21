@@ -1,5 +1,5 @@
 ---@class Menu : Level
----@field showSettings fun(self: Game, visible: boolean) -- Use to change settings menu visibility in the main menu.
+---@field toSubMenu fun(self: Game, submenu: MenuSubScreen)
 
 local Level = require("content.scripts.interfaces.level")
 local l = Level.new() --[[@as Menu]]
@@ -13,6 +13,13 @@ local cred = nil --[[@as Text2D]]
 local skydome = nil --[[@as Skydome]]
 local camera = nil --[[@as Camera]]
 local menuSong = nil --[[@as Sound]]
+
+---@enum MenuSubScreen
+MenuSubScreen = {
+    Main = 0,
+    Settings = 1,
+    Connect = 2
+}
 
 -- Functionality
 local logoTimer = 0.0
@@ -81,17 +88,26 @@ function l:init()
     end)
 
     self:add(require(req.Sublevels.MainMenuButtons), "main_buttons")
+    self:add(require(req.Sublevels.ConnectMenu), "connect")
+    local connect = self:getSublevel("connect")
+    if connect then connect:setActive(false) end
 end
 
-function l:showSettings(show)
+function l:toSubMenu(submenu)
+    logo.visible = submenu == MenuSubScreen.Main
+    cred.visible = logo.visible
+
     local settings = GameManager:getSublevel("settings") --[[@as SettingsMenu]]
     local menuButtons = self:getSublevel("main_buttons") --[[@as MainMenuButtons]]
-    if settings and settings._active ~= show then
-        settings:setActive(show)
-        menuButtons:setActive(not show)
-        logo.visible = not show
-        cred.visible = not show
+    local connect = self:getSublevel("connect") --[[@as ConnectMenu]]
+    if not settings or not menuButtons or not connect then
+        Lime.log("Invalid submenus!", Lime.Enum.PrintColor.Red)
+        return
     end
+
+    menuButtons:setActive(submenu == MenuSubScreen.Main)
+    connect:setActive(submenu == MenuSubScreen.Connect)
+    settings:setActive(submenu == MenuSubScreen.Settings)
 end
 
 function l:clean()

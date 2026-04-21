@@ -14,7 +14,9 @@ out.Sublevels = {
     -- Main menu buttons
     MainMenuButtons = root .. "sl_main_menu",
     -- Settings menu
-    SettingsMenu = root .. "sl_settings"
+    SettingsMenu = root .. "sl_settings",
+    -- Connect menu
+    ConnectMenu = root .."sl_connect"
 }
 
 return out

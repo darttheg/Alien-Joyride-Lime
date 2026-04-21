@@ -38,10 +38,17 @@ local function setButtonFunctionality()
     local settings = buttons[2] --[[@as Text2D]]
     local quit = buttons[3] --[[@as Text2D]]
 
+    play.onPressed:hook(function()
+        local mainMenu = GameManager.level --[[@as Menu?]]
+        if mainMenu then
+            mainMenu:toSubMenu(MenuSubScreen.Connect)
+        end
+    end)
+
     settings.onPressed:hook(function()
         local mainMenu = GameManager.level --[[@as Menu?]]
         if mainMenu then
-            mainMenu:showSettings(true)
+            mainMenu:toSubMenu(MenuSubScreen.Settings)
         end
     end)
     
