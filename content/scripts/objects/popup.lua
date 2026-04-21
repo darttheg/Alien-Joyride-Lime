@@ -24,6 +24,7 @@ end
 ---@param callback function?
 ---@param subtitle string?
 function p:setButtonParams(text, callback, subtitle)
+    self.buttonObj.container.visible = callback ~= nil
     self.buttonObj.title = text
     self.buttonObj.callback = callback
     self.buttonObj.subtitle = subtitle or ""

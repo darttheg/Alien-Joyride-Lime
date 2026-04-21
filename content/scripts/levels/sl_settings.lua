@@ -365,8 +365,9 @@ local function selectSubmenu(menu)
     updateLayout()
 end
 
+---@param self SettingsMenu
 ---@param status boolean
-local function onChangedStatus(status)
+local function onChangedStatus(self, status)
     headerContainer.visible = status
     backButton.visible = status
     applyButton.visible = status

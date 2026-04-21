@@ -1,4 +1,5 @@
 ---@class ConnectMenu : Sublevel
+---@field selectSubmenu fun(self: ConnectMenu, menu: SubMenus)
 
 local Sublevel = require("content.scripts.interfaces.sublevel")
 local sl = Sublevel.new() --[[@as ConnectMenu]]
@@ -75,7 +76,7 @@ local function createButton(text, small)
 end
 
 local function updateButtons()
-    local hbNames = { "Connect", "Host" }
+    local hbNames = { "Join", "Host" }
 
     backButton.text = "Back"
     if backButton:isHovered() then backButton.text = "<#CE67F7>" .. "Back" end
@@ -97,7 +98,7 @@ local function updateButtons()
 end
 
 ---@param menu SubMenus
-local function selectSubmenu(menu)
+function sl:selectSubmenu(menu)
     if subMenu == menu then return end
     subMenu = menu
     clearSettingsObjects()
@@ -125,7 +126,7 @@ local function selectSubmenu(menu)
         addToSettingsObjects(btn)
         namer = btn
 
-        btn = basicbutton.new("Connect") --[[@as BasicButton]]
+        btn = basicbutton.new("Join") --[[@as BasicButton]]
         connector = btn
         btn:setCallback(function()
             if not shuttleNaming.isValidAddress(addy.editText.text) then
@@ -204,7 +205,21 @@ local function selectSubmenu(menu)
                 hoster.subtitle = ""
             end
 
-            -- On clicking host, we should start using a Host sublevel to handle all networking. Use a PopUp object there instead of here.
+            if not Lime.Network.host(tonumber(cfg.port) or 0, cfg.maxAliens) then
+                local m = GameManager.level --[[@as Menu]]
+                local thisSubMenu = m:getSublevel("connect") --[[@as ConnectMenu]]
+                thisSubMenu:setActive(false)
+                local p = popUp.new("Failed to host server!\n\nBe sure to be\nconnected to the\ninternet.") --[[@as PopUp]]
+                p:setButtonParams("OK", function()
+                    thisSubMenu:setActive(true)
+                    thisSubMenu:selectSubmenu(SubMenus.Host)
+                    p:clean()
+                end)
+
+                return
+            end
+
+            -- Go to host level
         end)
         addToSettingsObjects(btn)
     end
@@ -228,8 +243,9 @@ local function selectSubmenu(menu)
     updateLayout()
 end
 
+---@param self ConnectMenu
 ---@param status boolean
-local function onChangedStatus(status)
+local function onChangedStatus(self, status)
     headerContainer.visible = status
     backButton.visible = status
 
@@ -237,7 +253,7 @@ local function onChangedStatus(status)
     subMenu = -1
     
     if status then
-        selectSubmenu(SubMenus.Connect)
+        self:selectSubmenu(SubMenus.Connect)
         updateLayoutHook = Lime.Window.onResize:hook(updateLayout)
         updateButtonsHook = Lime.onUpdate:hook(updateButtons)
     else
@@ -258,6 +274,8 @@ function sl:init()
     updateButtonsHook = Lime.onUpdate:hook(updateButtons)
     statChangeHook = self.onStatusChanged:hook(onChangedStatus)
 
+    local thisObj = self
+
     local hbNames = { "Connect", "Host" }
     local gap = (headerContainer.size.x - #hbNames * 200) / (#hbNames + 1)
     for i = 1, #hbNames do
@@ -266,7 +284,7 @@ function sl:init()
         btn.position.x = gap + (i - 1) * (200 + gap)
         headerButtons[i] = btn
         btn.onPressed:hook(function()
-            selectSubmenu(i - 1)
+            thisObj:selectSubmenu(i - 1)
         end)
     end
 

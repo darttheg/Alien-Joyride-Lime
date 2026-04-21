@@ -27,7 +27,7 @@ end
 function Sublevel:setActive(status)
     if self._active == status then return end
     self._active = status
-    self.onStatusChanged:run(self._active)
+    self.onStatusChanged:run(self, self._active)
 end
 
 --- **Override!** Should be run once a `Sublevel` is created. `Levels` call this when using `Level:add`.

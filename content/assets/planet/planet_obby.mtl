@@ -1,0 +1,9 @@
+
+newmtl Material.005
+map_Kd C:/mtl_wall01_s.png
+newmtl Material.004
+map_Kd C:/mtl_O_s.png
+newmtl Material.006
+map_Kd C:/conc_slabs01_s.png
+newmtl Material.002
+map_Kd C:/mtl_floor02_c.png

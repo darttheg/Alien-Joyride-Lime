@@ -89,7 +89,7 @@ function sl:init()
     end
 
     updateLayoutHook = Lime.Window.onResize:hook(updateLayout)
-    statusChangedHook = self.onStatusChanged:hook(function(active)
+    statusChangedHook = self.onStatusChanged:hook(function(self, active)
         container.visible = active
         if not active then updateButtonsHook:unhook() else updateButtonsHook = Lime.onUpdate:hook(updateButtons) end
     end)

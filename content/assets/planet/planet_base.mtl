@@ -1,0 +1,9 @@
+
+newmtl Material
+map_Kd C:/cracked_z.png
+newmtl Material.001
+map_Kd C:/mtl01_c.png
+newmtl Material.003
+map_Kd C:/ft_stone01_s_wet.png
+newmtl Material.005
+map_Kd C:/mtl_wall01_s.png
