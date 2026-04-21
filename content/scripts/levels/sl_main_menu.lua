@@ -26,7 +26,11 @@ local function updateButtons()
     for i = 1, #buttons do
         local out = buttons[i] --[[@as Text2D]]
         if out:isHovered() then
-            out.text = "<#CE67F7>" .. buttonText[i]
+            local color = "<#CE67F7>"
+            if Lime.Input.isMouseButtonDown(Lime.Enum.Mouse.Left) then
+                color = "<#68357C>"
+            end
+            out.text = color .. buttonText[i]
         else
             out.text = buttonText[i]
         end

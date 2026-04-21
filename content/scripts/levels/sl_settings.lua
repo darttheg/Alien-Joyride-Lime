@@ -77,7 +77,11 @@ local function updateButtons()
     for i = 1, #headerButtons do
         local out = headerButtons[i] --[[@as Text2D]]
         if out:isHovered() and i - 1 ~= subMenu then
-            out.text = "<#CE67F7>" .. hbNames[i]
+            local color = "<#CE67F7>"
+            if Lime.Input.isMouseButtonDown(Lime.Enum.Mouse.Left) then
+                color = "<#68357C>"
+            end
+            out.text = color .. hbNames[i]
         elseif i - 1 == subMenu then
             out.text = "<#68357C>" .. hbNames[i]
         else
@@ -425,7 +429,6 @@ function sl:init()
     end)
 
     applyButton.onPressed:hook(function()
-        Lime.log("Applied!")
         GameManager:applyConfig(tempConfig)
     end)
 

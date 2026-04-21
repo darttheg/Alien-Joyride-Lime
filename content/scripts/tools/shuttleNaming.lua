@@ -12,14 +12,14 @@ local title = {
     "Crasher",
     "Destroyer",
     "Explody",
-    "Sharpshooter",
+    "Blasty",
     "Fryer",
     "Detonator",
     "Brawler",
     "Astro",
     "CowEater",
     "Mercenary",
-    "Cannonballer"
+    "Squisher"
 }
 
 local alien = {
@@ -68,6 +68,12 @@ end
 function nameGen.isValidAddress(name)
     if #name == 0 or #name > 253 then return false end
     return name:match("^[%a%d%.%-%:]+$") ~= nil
+end
+
+---@param port number
+---@return boolean
+function nameGen.isValidPort(port)
+    return port >= 1 and port <= 65535 and math.floor(port) == port
 end
 
 ---@param str string

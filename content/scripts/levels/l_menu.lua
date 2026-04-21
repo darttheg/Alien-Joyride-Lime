@@ -111,6 +111,8 @@ function l:toSubMenu(submenu)
 end
 
 function l:clean()
+    menuSong:destroy()
+
     logo:destroy()
     cred:destroy()
     camera:destroy()

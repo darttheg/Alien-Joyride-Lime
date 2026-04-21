@@ -24,6 +24,13 @@ local function createMPConfig()
     out.defaultAddress = "127.0.0.1:25565"
     out.username = shuttleNaming.generate()
 
+    p.name = "Planet " .. out.username:sub(1, #out.username - 2)
+    p.port = 25565
+    p.maxAliens = 10
+    p.orbs = 1
+    p.events = 1
+    p.bots = 0
+
     out.params = p
     return out
 end

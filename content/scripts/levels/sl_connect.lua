@@ -10,6 +10,8 @@ local inputButton = require("content.scripts.objects.inputButton")
 local basicbutton = require("content.scripts.objects.basicButton")
 local typeButton = require("content.scripts.objects.editBoxButton")
 
+local popUp = require("content.scripts.objects.popup")
+
 local shuttleNaming = require("content.scripts.tools.shuttleNaming")
 
 ---@enum SubMenus
@@ -81,7 +83,11 @@ local function updateButtons()
     for i = 1, #headerButtons do
         local out = headerButtons[i] --[[@as Text2D]]
         if out:isHovered() and i - 1 ~= subMenu then
-            out.text = "<#CE67F7>" .. hbNames[i]
+            local color = "<#CE67F7>"
+            if Lime.Input.isMouseButtonDown(Lime.Enum.Mouse.Left) then
+                color = "<#68357C>"
+            end
+            out.text = color .. hbNames[i]
         elseif i - 1 == subMenu then
             out.text = "<#68357C>" .. hbNames[i]
         else
@@ -135,11 +141,72 @@ local function selectSubmenu(menu)
             else
                 connector.subtitle = ""
             end
+
+            -- On clicking connect, we should start using a Peer sublevel to handle all networking. Use a PopUp object there instead of here.
         end)
         addToSettingsObjects(btn)
 
     elseif menu == SubMenus.Host then
+        local cfg = GameManager.mpConfig.params
 
+        local name = nil
+        local port = nil
+
+        if #cfg.name == 0 then cfg.name = GameManager.mpConfig.username .. "'s Planet" end
+        btn = typeButton.new("Planet Name", cfg.name, 25) --[[@as EditBoxButton]]
+        btn:setVal(cfg.name)
+        btn:setCallback(function(v) GameManager.mpConfig.params.name = v end)
+        addToSettingsObjects(btn)
+        name = btn
+
+        if not cfg.port then cfg.port = 25565 end
+        btn = typeButton.new("Port", cfg.name, 5) --[[@as EditBoxButton]]
+        btn:setVal(cfg.port)
+        btn:setCallback(function(v) GameManager.mpConfig.params.port = tonumber(v) end)
+        addToSettingsObjects(btn)
+        port = btn
+
+        btn = sliderButton.new("Max Aliens", Vec2.new(1, 25), false) --[[@as SliderButton]]
+        btn:setVal(cfg.maxAliens)
+        btn:setCallback(function(v) GameManager.mpConfig.params.maxAliens = v end)
+        addToSettingsObjects(btn)
+
+        btn = enumeratorButton.new("Power Orbs", {"Off", "On"}, "Spawn power orbs.") --[[@as EnumeratorButton]]
+        btn:setVal(cfg.orbs)
+        btn:setCallback(function(v) GameManager.mpConfig.params.orbs = v end)
+        addToSettingsObjects(btn)
+
+        btn = enumeratorButton.new("Events", {"Off", "Rare", "Frequent"}, "Obstacles on the planet change.") --[[@as EnumeratorButton]]
+        btn:setVal(cfg.events)
+        btn:setCallback(function(v) GameManager.mpConfig.params.events = v end)
+        addToSettingsObjects(btn)
+
+        btn = enumeratorButton.new("Bots", {"Off", "Easy", "Normal", "Hard", "CRAAAZY!!!"}, "Send bot aliens to the planet.") --[[@as EnumeratorButton]]
+        btn:setVal(cfg.bots)
+        btn:setCallback(function(v) GameManager.mpConfig.params.bots = v end)
+        addToSettingsObjects(btn)
+
+        local hoster = nil
+        btn = basicbutton.new("Host") --[[@as BasicButton]]
+        hoster = btn
+        btn:setCallback(function()
+            if #name.editText.text == 0 then
+                hoster.subtitle = "<#E75050>Planet name should not be empty!"
+                return
+            else
+                hoster.subtitle = ""
+            end
+
+            if not shuttleNaming.isValidPort(tonumber(port.editText.text) or 0) then
+                hoster.subtitle = "<#E75050>Server port is not valid!"
+                return
+            else
+                hoster.subtitle = ""
+            end
+
+            -- On clicking host, we should start using a Host sublevel to handle all networking. Use a PopUp object there instead of here.
+        end)
+        addToSettingsObjects(btn)
     end
 
     updateLayoutCurrentSettings = function()
@@ -222,6 +289,8 @@ function sl:clean()
         local cur = headerButtons[i] --[[@as Text2D]]
         cur:destroy()
     end
+
+    clearSettingsObjects()
 
     headerContainer:destroy()
 

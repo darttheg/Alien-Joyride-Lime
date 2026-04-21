@@ -140,7 +140,7 @@ function btn:init()
 
     self.pressHook = self.container.onPressed:hook(function()
         -- Focus hidden editbox for typing
-        if thisObj.isFocused then return end
+        if thisObj.isFocused then thisObj.typeBox.focused = true return end
         if not thisObj.typeBox.focused then
             thisObj.typeBox.focused = true
             thisObj.isFocused = true
