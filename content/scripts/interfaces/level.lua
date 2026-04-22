@@ -61,6 +61,15 @@ function Level:getSublevel(id)
     return nil
 end
 
+--- Cleans the `Sublevels` of this `Level`.
+---@param ... any
+function Level:cleanSublevels(...)
+    for k, v in pairs(self.sublevels) do
+        v:clean(...)
+    end
+    return nil
+end
+
 -- To Override
 
 --- **Override!** Runs when this `Level` is first created.

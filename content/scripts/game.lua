@@ -5,9 +5,9 @@
 ---@field onConfigChanged Event -- Fires when game config is changed.
 ---@field fonts table<string, table<string, string>> -- Fonts, can be fetched using .name.pxsize
 ---@field state GameState -- Game state
----@field uiState UIState -- UI state
 ---@field config Config -- Game configuration table
 ---@field mpConfig MultiplayerConfig -- Multiplayer config table
+---@field jump fun(self: Game, state: GameState)
 
 local Manager = require("content.scripts.interfaces.manager")
 local game = Manager.new() --[[@as Game]]
@@ -102,8 +102,7 @@ end
 function game:init()
     self.config = {} --[[@as Config]]
     self.fonts = {}
-    self.state = GameState.Menu
-    self.uiState = UIState.MainMenu
+    self.state = -1
     self.onConfigChanged = Event.new()
 
     if true then
@@ -153,7 +152,7 @@ function game:init()
         GameManager:add(require(req.Sublevels.SettingsMenu), "settings")
         local settings = GameManager:getSublevel("settings")
         if settings then settings:setActive(false) end
-        GameManager:visit(require(req.Levels.Menu), "menu")
+        GameManager:jump(GameState.Menu)
     end)
 
     Lime.onClose:hook(function()
@@ -181,12 +180,35 @@ end
 
 ---
 
----@param cfg Config
 function game:applyConfig(cfg) -- Should only run post window creation
     if not self.config or not Lime.Window.isCreated() then return end
 
     self.config = cfg
     self.onConfigChanged:run(self.config)
+end
+
+function game:jump(state)
+    if self.state == state then return end
+
+    if state == GameState.Menu then
+        self.state = state
+        self:visit(require(req.Levels.Menu), "menu")
+        return
+    end
+
+    if state == GameState.Host then
+        self.state = state
+        self:visit(require(req.Levels.HostInstance), "host")
+        return
+    end
+
+    if state == GameState.Peer then
+        self.state = state
+        self:visit(require(req.Levels.PeerInstance), "peer")
+        return
+    end
+
+    Lime.log("Game state not accounted for! (" .. state .. ")")
 end
 
 return game

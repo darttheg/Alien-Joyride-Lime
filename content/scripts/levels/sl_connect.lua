@@ -143,7 +143,7 @@ function sl:selectSubmenu(menu)
                 connector.subtitle = ""
             end
 
-            -- On clicking connect, we should start using a Peer sublevel to handle all networking. Use a PopUp object there instead of here.
+            -- GameManager:jump(GameState.Peer)
         end)
         addToSettingsObjects(btn)
 
@@ -222,7 +222,7 @@ function sl:selectSubmenu(menu)
                 return
             end
 
-            -- Go to host level
+            GameManager:jump(GameState.Host)
         end)
         addToSettingsObjects(btn)
     end

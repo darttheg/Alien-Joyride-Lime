@@ -1,16 +1,8 @@
 ---@enum GameState
 GameState = {
     Menu = 0,
-    Play = 1
-}
-
----@enum UIState
-UIState = {
-    MainMenu = 0,
-    Settings = 1,
-    ServerScreen = 2,
-    Paused = 3,
-    Chat = 4
+    Peer = 1,
+    Host = 2
 }
 
 ---@class ConfigGFX
@@ -18,7 +10,6 @@ UIState = {
 ---@field fov number
 ---@field fps integer
 ---@field vsync integer
----@field perspective integer
 ---@field chatbox integer
 ---@field info integer
 
@@ -40,7 +31,6 @@ UIState = {
 ---@field weapon_raygun { [1]: integer, [2]: boolean }
 ---@field weapon_rpg { [1]: integer, [2]: boolean }
 ---@field weapon_railgun { [1]: integer, [2]: boolean }
----@field perspective { [1]: integer, [2]: boolean }
 ---@field previousWeapon { [1]: integer, [2]: boolean }
 
 ---@class Config

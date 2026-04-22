@@ -213,11 +213,6 @@ local function selectSubmenu(menu)
         btn:setCallback(function(v) tempConfig.gfx.driver = v end)
         addToSettingsObjects(btn)
 
-        btn = enumeratorButton.new("Perspective", {"First", "Third"}) --[[@as EnumeratorButton]]
-        btn:setVal(tempConfig.gfx.perspective)
-        btn:setCallback(function(v) tempConfig.gfx.perspective = v end)
-        addToSettingsObjects(btn)
-
         btn = sliderButton.new("Field of View", Vec2.new(75, 120), false) --[[@as SliderButton]]
         btn:setVal(tempConfig.gfx.fov)
         btn:setCallback(function(v) tempConfig.gfx.fov = v end)
@@ -330,12 +325,6 @@ local function selectSubmenu(menu)
         inp = tempConfig.input.weapon_railgun
         btn:setVal(inputToString.ToString(inp[1], inp[2]))
         btn:setCallback(function(code, mouse) tempConfig.input.weapon_railgun = {code, mouse} end)
-        addToSettingsObjects(btn)
-
-        btn = inputButton.new("Perspective") --[[@as InputButton]]
-        inp = tempConfig.input.perspective
-        btn:setVal(inputToString.ToString(inp[1], inp[2]))
-        btn:setCallback(function(code, mouse) tempConfig.input.perspective = {code, mouse} end)
         addToSettingsObjects(btn)
 
         btn = inputButton.new("Previous Weapon") --[[@as InputButton]]

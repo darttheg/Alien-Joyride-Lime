@@ -27,7 +27,8 @@ end
 ---@param ... any
 function Manager:visit(level, id, ...)
     if self.level then
-        Lime.log("Manager should not be cleaning the current level. (" .. self.level.id .. ")", Lime.Enum.PrintColor.Yellow)
+        -- Lime.log("Manager should not be cleaning the current level. (" .. self.level.id .. ")", Lime.Enum.PrintColor.Yellow)
+        self.level:cleanSublevels()
         self.level:clean() -- Manager should NOT have to account for cleaning the current level, but it does so anyway just in case.
     end
 
