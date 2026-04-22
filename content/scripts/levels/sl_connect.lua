@@ -209,7 +209,10 @@ function sl:selectSubmenu(menu)
                 local m = GameManager.level --[[@as Menu]]
                 local thisSubMenu = m:getSublevel("connect") --[[@as ConnectMenu]]
                 thisSubMenu:setActive(false)
-                local p = popUp.new("Failed to host server!\n\nBe sure to be\nconnected to the\ninternet.") --[[@as PopUp]]
+                local out = "Failed to host server!\n\nBe sure to be\nconnected to the\ninternet."
+                if Lime.Network.isHosting() then out = "You are already hosting...\nTell no one how you\ngot here." end
+
+                local p = popUp.new(out) --[[@as PopUp]]
                 p:setButtonParams("OK", function()
                     thisSubMenu:setActive(true)
                     thisSubMenu:selectSubmenu(SubMenus.Host)
