@@ -172,21 +172,6 @@ function sl:selectSubmenu(menu)
         btn:setCallback(function(v) GameManager.mpConfig.params.maxAliens = v end)
         addToSettingsObjects(btn)
 
-        btn = enumeratorButton.new("Power Orbs", {"Off", "On"}, "Spawn power orbs.") --[[@as EnumeratorButton]]
-        btn:setVal(cfg.orbs)
-        btn:setCallback(function(v) GameManager.mpConfig.params.orbs = v end)
-        addToSettingsObjects(btn)
-
-        btn = enumeratorButton.new("Events", {"Off", "Rare", "Frequent"}, "Obstacles on the planet change.") --[[@as EnumeratorButton]]
-        btn:setVal(cfg.events)
-        btn:setCallback(function(v) GameManager.mpConfig.params.events = v end)
-        addToSettingsObjects(btn)
-
-        btn = enumeratorButton.new("Bots", {"Off", "Easy", "Normal", "Hard", "CRAAAZY!!!"}, "Send bot aliens to the planet.") --[[@as EnumeratorButton]]
-        btn:setVal(cfg.bots)
-        btn:setCallback(function(v) GameManager.mpConfig.params.bots = v end)
-        addToSettingsObjects(btn)
-
         local hoster = nil
         btn = basicbutton.new("Host") --[[@as BasicButton]]
         hoster = btn

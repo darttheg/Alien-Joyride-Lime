@@ -22,6 +22,7 @@ local spinnyRings = nil --[[@as Mesh]]
 local ufos = nil --[[@as Mesh]]
 local sun = nil --[[@as Light]]
 local rocket = nil --[[@as Empty]] --(Empty + Rocket)
+local border = nil --[[@as Mesh]]
 
 local song = nil --[[@as Sound]]
 local songHook = nil --[[@as Hook]]
@@ -36,7 +37,6 @@ local dir = "./content/assets/planet/"
 local function applyMaterials(mesh, srcMat, txPaths)
     for i = 1, #txPaths do
         srcMat:loadTexture(Texture.new(dir .. "textures/" .. txPaths[i] .. ".png"))
-        Lime.log(dir .. "textures/" .. txPaths[i] .. ".png")
         mesh:loadMaterial(srcMat, i - 1)
     end
 end
@@ -105,6 +105,16 @@ local function createPlanet()
         spinnyRings.position.y = math.cos(Lime.getElapsedTime() / 2500) * 0.3 + 11.0
         rocket.position.y = math.sin(Lime.getElapsedTime() / 2500) * 0.5 + 17.0
     end)
+
+    local invis = Material.new()
+    invis.type = Lime.Enum.MaterialType.AlphaHarsh
+    invis.lighting = false
+    invis.fog = false
+    invis.mipmaps = false
+    invis:loadTexture(Texture.new("blank"))
+    border = Mesh.new(dir .. "border.obj")
+    border:loadMaterial(invis)
+    pushToObjs(border, true)
 end
 
 function sl:init()

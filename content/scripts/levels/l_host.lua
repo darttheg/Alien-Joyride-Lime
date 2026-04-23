@@ -4,12 +4,15 @@ local Level = require("content.scripts.interfaces.level")
 local l = Level.new() --[[@as HostInstance]]
 setmetatable(l, { __index = Level })
 
+local planet = nil --[[@as PlanetMap]]
+
 function l:init()
-    self:add(require(req.Sublevels.Planet), "planet")
+    planet = require(req.Sublevels.Planet)
+    self:add(planet, "planet")
 end
 
 function l:clean()
-    
+    planet = nil --[[@as PlanetMap]]
 end
 
 return l
